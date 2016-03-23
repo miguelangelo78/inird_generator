@@ -29,13 +29,12 @@ char * fileread(int buffer_size, char * filename) {
 
 void create_initrd(char ** argv) {
 	printf("- Creating initrd.img ...\n");
-	FILE * initrd_file = fopen("iso/initrd.img", "w");
+	FILE * initrd_file = fopen("./initrd.img", "w");
 
 	/* Write the entire struct into the file: */
 	fwrite((char*)&initrd_header.header_size, sizeof(unsigned int), 2, initrd_file);
 	fwrite(initrd_header.offset, sizeof(unsigned int), initrd_header.file_count, initrd_file);
 	fwrite(initrd_header.length, sizeof(unsigned int), initrd_header.file_count, initrd_file);
-
 
 	int i;
 	for(i = 0; i < initrd_header.file_count; i++)
@@ -56,11 +55,11 @@ void create_initrd(char ** argv) {
 
 int main(char argc, char **argv) {
 	if(!(argc-1)) {
-		printf("ERROR: You did not provide files!\nUsage: initrd.exe mod1.mod mod2.mod mod3.mod ...");
+		printf("ERROR: You did not provide files!\nUsage: initrd_gen ./file1 ./file2 ./file3 ...");
 		getch();
 		return 1;
 	}
-	printf("- Module count: %d\n", argc - 1);
+	printf("- File count: %d\n", argc - 1);
 
 	/* Allocate everything: */
 	initrd_header.file_count = argc - 1;
@@ -75,7 +74,7 @@ int main(char argc, char **argv) {
 		+ (initrd_header.file_count * FILENAME_LENGTH);
 
 	/* Allocate the rest of the table (with respect to the files): */
-	printf("- Header size: %d bytes\n- Adding modules:\n", initrd_header.header_size);
+	printf("- Header size: %d bytes\n- Adding files:\n", initrd_header.header_size);
 	int i;
 	for(i = 0; i < initrd_header.file_count; i++) {
 		initrd_header.filename[i] = (char*) malloc(sizeof(unsigned char) * FILENAME_LENGTH);
