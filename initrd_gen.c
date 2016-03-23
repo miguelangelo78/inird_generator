@@ -81,8 +81,8 @@ int main(char argc, char **argv) {
 		initrd_header.length[i] = filesize(argv[i+1]);
 		initrd_header.offset[i] = i ? initrd_header.offset[i-1]+initrd_header.length[i-1] : initrd_header.header_size;
 		memset(initrd_header.filename[i], 0, FILENAME_LENGTH);
-		strcpy(initrd_header.filename[i], strrchr(argv[i+1],'\\')+1);
-
+		char * lastindex = strrchr(argv[i+1],'\\');
+		strcpy(initrd_header.filename[i], lastindex ? (lastindex+1) : argv[i+1]);
 		printf("  %d > %s (offset: %d size: %d bytes)\n", i+1, initrd_header.filename[i], initrd_header.offset[i], initrd_header.length[i]);
 	}
 		
