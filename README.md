@@ -28,3 +28,4 @@ struct {
 
 ![initrd filesystem diagram](http://i.imgur.com/uRsDq2v.png)
 
+**VERY IMPORTANT NOTE**: There is a missing field on the diagram. Right after the 'File Lengths' field, the Filenames' field starts. The field is exactly the same as the Offsets and Lengths' field, except each filename is terminated with a null character (for obvious reasons).
