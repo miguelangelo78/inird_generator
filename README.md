@@ -26,5 +26,5 @@ struct {
 } initrd_header;
 ```
 
-![initrd filesystem diagram](http://i.imgur.com/UTAxGEZ.png)
+![initrd filesystem diagram](http://i.imgur.com/uRsDq2v.png)
 
