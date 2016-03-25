@@ -32,7 +32,7 @@ void create_initrd(char ** argv) {
 	FILE * initrd_file = fopen("./initrd.img", "wb");
 
 	/* Write the entire struct into the file: */
-	fwrite((char*)&initrd_header.header_size, sizeof(unsigned int), 2, initrd_file);
+	fwrite((unsigned int*)&initrd_header.header_size, sizeof(unsigned int), 2, initrd_file);
 	fwrite(initrd_header.offset, sizeof(unsigned int), initrd_header.file_count, initrd_file);
 	fwrite(initrd_header.length, sizeof(unsigned int), initrd_header.file_count, initrd_file);
 
