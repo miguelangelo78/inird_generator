@@ -29,7 +29,7 @@ char * fileread(int buffer_size, char * filename) {
 
 void create_initrd(char ** argv) {
 	printf("- Creating initrd.img ...\n");
-	FILE * initrd_file = fopen("./initrd.img", "w");
+	FILE * initrd_file = fopen("./initrd.img", "wb");
 
 	/* Write the entire struct into the file: */
 	fwrite((char*)&initrd_header.header_size, sizeof(unsigned int), 2, initrd_file);
