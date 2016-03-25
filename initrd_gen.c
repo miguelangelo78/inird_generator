@@ -12,7 +12,7 @@ struct {
 } __attribute__((packed)) initrd_header;
 
 unsigned int filesize(char * filename) {
-	FILE * f = fopen(filename, "r");
+	FILE * f = fopen(filename, "rb");
 	fseek(f, 0, SEEK_END);
 	unsigned int size = (unsigned int)ftell(f);
 	fclose(f);
@@ -21,7 +21,7 @@ unsigned int filesize(char * filename) {
 
 char * fileread(int buffer_size, char * filename) {
 	char * buff = (char*)malloc(buffer_size);
-	FILE * f = fopen(filename, "r");
+	FILE * f = fopen(filename, "rb");
 	fread(buff, sizeof(char), buffer_size, f);
 	fclose(f);
 	return buff;
